@@ -1,12 +1,15 @@
-from fastapi import FastAPI, HTTPException, Depends # type: ignore
-from fastapi.middleware.cors import CORSMiddleware # type: ignore
-from sqlalchemy.orm import Session # type: ignore
+from fastapi import FastAPI, HTTPException, Depends
+from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy.orm import Session
 from datetime import datetime
 import sys
 
 # Import our database and models
 from database.connection import get_db, test_connection, engine, Base
 from routes.tracking import router as tracking_router
+
+# Create analytics routes
+from routes.analytics import router as analytics_router
 
 # Create all database tables
 Base.metadata.create_all(bind=engine)
@@ -30,6 +33,7 @@ app.add_middleware(
 
 # Include routers
 app.include_router(tracking_router)
+app.include_router(analytics_router)
 
 # Basic routes
 @app.get("/")
@@ -38,7 +42,13 @@ async def root():
         "message": "LinkPro Analytics API is running",
         "version": "1.0.0",
         "python_version": f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}",
-        "docs": "Visit /docs for interactive API documentation"
+        "docs": "Visit /docs for interactive API documentation",
+        "features": {
+            "tracking": "Click and page view tracking",
+            "analytics": "Comprehensive analytics and insights",
+            "traffic_analysis": "Traffic source detection and analysis",
+            "time_analysis": "Time-based performance insights"
+        }
     }
 
 @app.get("/health")
@@ -67,29 +77,18 @@ async def system_info():
         "environment": "development"
     }
 
-# Legacy endpoints for backward compatibility (these will be removed later)
-@app.post("/api/track/click")
-async def legacy_track_click():
-    """Legacy endpoint - redirects to new tracking system"""
-    raise HTTPException(
-        status_code=301,
-        detail="This endpoint has moved. Use POST /api/track/click with link_id and profile_id parameters"
-    )
-
-@app.post("/api/track/view")
-async def legacy_track_view():
-    """Legacy endpoint - redirects to new tracking system"""
-    raise HTTPException(
-        status_code=301,
-        detail="This endpoint has moved. Use POST /api/track/view with profile_id parameter"
-    )
-
 # Only run with uvicorn if called directly (for development)
 if __name__ == "__main__":
     print("Starting LinkPro Analytics API...")
     print(f"Running on Python {sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}")
     print("Visit http://localhost:8000/docs for interactive API documentation")
+    print("New Features Added:")
+    print("- Profile Analytics: /api/analytics/profile/{profile_id}")
+    print("- Traffic Analytics: /api/analytics/traffic/{profile_id}")
+    print("- Time Analytics: /api/analytics/time/{profile_id}")
+    print("- Quick Stats: /api/analytics/quick-stats/{profile_id}")
+    print("- Period Comparison: /api/analytics/compare/{profile_id}")
     print("Use 'uvicorn src.main:app --reload' for development with hot reload")
     
-    import uvicorn # type: ignore
+    import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
