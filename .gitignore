@@ -65,6 +65,8 @@ htmlcov/
 # Documentation
 docs/_build/
 
+.gitignore
+
 # Jupyter Notebook
 .ipynb_checkpoints
 
