@@ -6,7 +6,7 @@ import time
 
 # Configuration
 BASE_URL = "http://localhost:8000"
-TEST_PROFILE_ID = 1  # Make sure this profile exists in your database
+TEST_PROFILE_ID = 1  # Ensure this profile exists in your database
 
 class AnalyticsTestSuite:
     def __init__(self):
@@ -18,19 +18,19 @@ class AnalyticsTestSuite:
         try:
             response = requests.get(f"{self.base_url}/health")
             if response.status_code == 200:
-                print("✅ API connection successful")
-                print(f"   Status: {response.json().get('status')}")
+                print("API connection successful")
+                print(f"Status: {response.json().get('status')}")
                 return True
             else:
-                print("❌ API connection failed")
+                print("API connection failed")
                 return False
         except Exception as e:
-            print(f"❌ API connection error: {e}")
+            print(f"API connection error: {e}")
             return False
     
     def generate_test_data(self, num_clicks=50, num_views=100):
         """Generate sample click and view data for testing"""
-        print(f"\n🔄 Generating {num_clicks} clicks and {num_views} views...")
+        print(f"\nGenerating {num_clicks} clicks and {num_views} views...")
         
         # Sample referrers for traffic source testing
         referrers = [
@@ -59,11 +59,10 @@ class AnalyticsTestSuite:
                 if response.status_code == 200:
                     success_count += 1
                 
-                # Add some randomness to timing
                 time.sleep(random.uniform(0.1, 0.3))
                 
             except Exception as e:
-                print(f"   Error generating view {i}: {e}")
+                print(f"Error generating view {i}: {e}")
         
         # Generate clicks (assume link_id=1 exists)
         for i in range(num_clicks):
@@ -83,64 +82,64 @@ class AnalyticsTestSuite:
                 time.sleep(random.uniform(0.1, 0.3))
                 
             except Exception as e:
-                print(f"   Error generating click {i}: {e}")
+                print(f"Error generating click {i}: {e}")
         
-        print(f"✅ Generated test data: {success_count}/{num_clicks + num_views} events successful")
+        print(f"Generated test data: {success_count}/{num_clicks + num_views} events successful")
     
     def test_profile_analytics(self):
         """Test the profile analytics endpoint"""
-        print("\n🔄 Testing profile analytics...")
+        print("\nTesting profile analytics...")
         
         try:
             response = requests.get(f"{self.base_url}/api/analytics/profile/{self.profile_id}")
             
             if response.status_code == 200:
                 data = response.json()
-                print("✅ Profile analytics working")
-                print(f"   Total clicks: {data['total_metrics']['total_clicks']}")
-                print(f"   Total views: {data['total_metrics']['total_views']}")
-                print(f"   CTR: {data['total_metrics']['click_through_rate']}%")
-                print(f"   Links analyzed: {len(data['links_analytics'])}")
+                print("Profile analytics working")
+                print(f"Total clicks: {data['total_metrics']['total_clicks']}")
+                print(f"Total views: {data['total_metrics']['total_views']}")
+                print(f"CTR: {data['total_metrics']['click_through_rate']}%")
+                print(f"Links analyzed: {len(data['links_analytics'])}")
                 return True
             else:
-                print(f"❌ Profile analytics failed: {response.status_code}")
-                print(f"   Error: {response.text}")
+                print(f"Profile analytics failed: {response.status_code}")
+                print(f"Error: {response.text}")
                 return False
                 
         except Exception as e:
-            print(f"❌ Profile analytics error: {e}")
+            print(f"Profile analytics error: {e}")
             return False
     
     def test_traffic_analytics(self):
         """Test the traffic source analytics endpoint"""
-        print("\n🔄 Testing traffic source analytics...")
+        print("\nTesting traffic source analytics...")
         
         try:
             response = requests.get(f"{self.base_url}/api/analytics/traffic/{self.profile_id}")
             
             if response.status_code == 200:
                 data = response.json()
-                print("✅ Traffic analytics working")
-                print(f"   Total clicks tracked: {data['total_clicks']}")
-                print(f"   Total views tracked: {data['total_views']}")
-                print(f"   Traffic sources found: {len(data['sources'])}")
+                print("Traffic analytics working")
+                print(f"Total clicks tracked: {data['total_clicks']}")
+                print(f"Total views tracked: {data['total_views']}")
+                print(f"Traffic sources found: {len(data['sources'])}")
                 
                 for source in data['sources'][:3]:  # Show top 3
-                    print(f"   - {source['source']}: {source['clicks']} clicks ({source['percentage']}%)")
+                    print(f"- {source['source']}: {source['clicks']} clicks ({source['percentage']}%)")
                 
                 return True
             else:
-                print(f"❌ Traffic analytics failed: {response.status_code}")
-                print(f"   Error: {response.text}")
+                print(f"Traffic analytics failed: {response.status_code}")
+                print(f"Error: {response.text}")
                 return False
                 
         except Exception as e:
-            print(f"❌ Traffic analytics error: {e}")
+            print(f"Traffic analytics error: {e}")
             return False
     
     def test_time_analytics(self):
         """Test the time-based analytics endpoint"""
-        print("\n🔄 Testing time analytics...")
+        print("\nTesting time analytics...")
         
         try:
             response = requests.get(
@@ -150,29 +149,29 @@ class AnalyticsTestSuite:
             
             if response.status_code == 200:
                 data = response.json()
-                print("✅ Time analytics working")
-                print(f"   Granularity: {data['granularity']}")
-                print(f"   Data points: {len(data['data'])}")
+                print("Time analytics working")
+                print(f"Granularity: {data['granularity']}")
+                print(f"Data points: {len(data['data'])}")
                 
                 if data['peak_day']:
-                    print(f"   Peak day: {data['peak_day']}")
+                    print(f"Peak day: {data['peak_day']}")
                 
                 if data['best_time_recommendation']:
-                    print(f"   Recommendation: {data['best_time_recommendation']}")
+                    print(f"Recommendation: {data['best_time_recommendation']}")
                 
                 return True
             else:
-                print(f"❌ Time analytics failed: {response.status_code}")
-                print(f"   Error: {response.text}")
+                print(f"Time analytics failed: {response.status_code}")
+                print(f"Error: {response.text}")
                 return False
                 
         except Exception as e:
-            print(f"❌ Time analytics error: {e}")
+            print(f"Time analytics error: {e}")
             return False
     
     def test_quick_stats(self):
         """Test the quick stats endpoint"""
-        print("\n🔄 Testing quick stats...")
+        print("\nTesting quick stats...")
         
         try:
             response = requests.get(
@@ -182,28 +181,28 @@ class AnalyticsTestSuite:
             
             if response.status_code == 200:
                 data = response.json()
-                print("✅ Quick stats working")
-                print(f"   Period: {data['period_days']} days")
-                print(f"   Total clicks: {data['summary']['total_clicks']}")
-                print(f"   Total views: {data['summary']['total_views']}")
-                print(f"   CTR: {data['summary']['click_through_rate']}%")
+                print("Quick stats working")
+                print(f"Period: {data['period_days']} days")
+                print(f"Total clicks: {data['summary']['total_clicks']}")
+                print(f"Total views: {data['summary']['total_views']}")
+                print(f"CTR: {data['summary']['click_through_rate']}%")
                 
                 if data['top_performing_link']:
-                    print(f"   Top link: {data['top_performing_link']['title']}")
+                    print(f"Top link: {data['top_performing_link']['title']}")
                 
                 return True
             else:
-                print(f"❌ Quick stats failed: {response.status_code}")
-                print(f"   Error: {response.text}")
+                print(f"Quick stats failed: {response.status_code}")
+                print(f"Error: {response.text}")
                 return False
                 
         except Exception as e:
-            print(f"❌ Quick stats error: {e}")
+            print(f"Quick stats error: {e}")
             return False
     
     def test_period_comparison(self):
         """Test the period comparison endpoint"""
-        print("\n🔄 Testing period comparison...")
+        print("\nTesting period comparison...")
         
         try:
             response = requests.get(
@@ -213,18 +212,18 @@ class AnalyticsTestSuite:
             
             if response.status_code == 200:
                 data = response.json()
-                print("✅ Period comparison working")
-                print(f"   Current period clicks: {data['current_period']['metrics']['total_clicks']}")
-                print(f"   Previous period clicks: {data['previous_period']['metrics']['total_clicks']}")
-                print(f"   Change in clicks: {data['changes']['clicks']['absolute']} ({data['changes']['clicks']['percentage']}%)")
+                print("Period comparison working")
+                print(f"Current period clicks: {data['current_period']['metrics']['total_clicks']}")
+                print(f"Previous period clicks: {data['previous_period']['metrics']['total_clicks']}")
+                print(f"Change in clicks: {data['changes']['clicks']['absolute']} ({data['changes']['clicks']['percentage']}%)")
                 return True
             else:
-                print(f"❌ Period comparison failed: {response.status_code}")
-                print(f"   Error: {response.text}")
+                print(f"Period comparison failed: {response.status_code}")
+                print(f"Error: {response.text}")
                 return False
                 
         except Exception as e:
-            print(f"❌ Period comparison error: {e}")
+            print(f"Period comparison error: {e}")
             return False
     
     def run_all_tests(self, generate_data=True):
@@ -240,7 +239,7 @@ class AnalyticsTestSuite:
         
         # Generate test data if requested
         if generate_data:
-            print("\nℹ️  Generating test data to ensure meaningful results...")
+            print("\nGenerating test data to ensure meaningful results...")
             self.generate_test_data(num_clicks=25, num_views=50)
         
         # Run analytics tests
@@ -257,7 +256,7 @@ class AnalyticsTestSuite:
         
         passed = 0
         for test_name, result in results:
-            status = "✅ PASS" if result else "❌ FAIL"
+            status = "PASS" if result else "FAIL"
             print(f"{test_name:<20}: {status}")
             if result:
                 passed += 1
@@ -265,13 +264,13 @@ class AnalyticsTestSuite:
         print(f"\nOverall: {passed}/{len(results)} tests passed")
         
         if passed == len(results):
-            print("\n🎉 All tests passed! Your analytics system is working correctly.")
+            print("\nAll tests passed. The analytics system is working correctly.")
             print("\nNext steps:")
             print("- Visit http://localhost:8000/docs to explore the API")
             print("- Test with real data from your LinkPro frontend")
             print("- Start building the dashboard (Week 3)")
         else:
-            print("\n⚠️  Some tests failed. Check the errors above and fix them before proceeding.")
+            print("\nSome tests failed. Check the errors above and resolve them before proceeding.")
 
 if __name__ == "__main__":
     # Run the test suite
@@ -280,7 +279,7 @@ if __name__ == "__main__":
     print("Starting LinkPro Analytics Test Suite...")
     print(f"Testing against: {BASE_URL}")
     print(f"Using profile ID: {TEST_PROFILE_ID}")
-    print("\nMake sure your API server is running!")
+    print("\nEnsure your API server is running.")
     print("Command: python src/main.py")
     
     input("\nPress Enter to continue...")

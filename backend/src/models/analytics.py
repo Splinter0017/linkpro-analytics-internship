@@ -30,7 +30,7 @@ class ProfileAnalytics(BaseModel):
 
 class TrafficSource(BaseModel):
     """Traffic source breakdown"""
-    source: str  # 'instagram', 'tiktok', 'direct', 'other'
+    source: str  
     clicks: int
     views: int
     percentage: float
@@ -44,7 +44,7 @@ class TrafficAnalytics(BaseModel):
 
 class TimeBasedMetrics(BaseModel):
     """Metrics for a specific time period"""
-    period: str  # '2024-01-15' or '2024-01-15 14:00'
+    period: str  
     clicks: int
     views: int
     unique_visitors: int
@@ -52,10 +52,10 @@ class TimeBasedMetrics(BaseModel):
 class TimeAnalytics(BaseModel):
     """Time-based analytics"""
     profile_id: int
-    granularity: str  # 'hourly', 'daily', 'weekly'
+    granularity: str  
     data: List[TimeBasedMetrics]
-    peak_hour: Optional[int] = None  # 0-23
-    peak_day: Optional[str] = None  # 'monday', 'tuesday', etc.
+    peak_hour: Optional[int] = None  
+    peak_day: Optional[str] = None  
     best_time_recommendation: Optional[str] = None
 
 class AnalyticsPeriod(BaseModel):
@@ -69,4 +69,4 @@ class AnalyticsQuery(BaseModel):
     period: Optional[AnalyticsPeriod] = None
     include_traffic_sources: bool = True
     include_time_analysis: bool = True
-    granularity: str = 'daily'  # 'hourly', 'daily', 'weekly'
+    granularity: str = 'daily'  

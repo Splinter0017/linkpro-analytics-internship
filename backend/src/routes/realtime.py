@@ -31,7 +31,6 @@ async def websocket_endpoint(websocket: WebSocket, profile_id: int):
         while True:
             await asyncio.sleep(5)
             
-            # Here you would fetch latest data from database
             data = {
                 "type": "update",
                 "profile_id": profile_id,
