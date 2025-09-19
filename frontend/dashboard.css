@@ -1,6 +1,51 @@
-@keyframes slideIn {
+/* Import Poppins Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap');
+
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+.text {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 400;
+}
+
+.title {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 700;
+}
+
+/* Color Palette - Based on linkpro.ma */
+.text-blue-custom {
+    color: #312783 !important;
+}
+
+.text-orange-custom {
+    color: #E23216 !important;
+}
+
+.bg-blue-custom {
+    background-color: #312783 !important;
+}
+
+.bg-orange-custom {
+    background-color: #E23216 !important;
+}
+
+.bg-gradient-custom {
+    background: linear-gradient(45deg, #312783, #E23216);
+}
+
+/* Border Radius - Following linkpro.ma pattern */
+.radius-custom {
+    border-radius: 20px;
+}
+
+/* Animation and Transition Effects */
+@keyframes fadeInUp {
     from { 
-        transform: translateY(-10px); 
+        transform: translateY(50px); 
         opacity: 0; 
     }
     to { 
@@ -14,20 +59,15 @@
     100% { transform: rotate(360deg); }
 }
 
-@keyframes pulse {
+@keyframes pulse-custom {
     0% { opacity: 1; }
-    50% { opacity: 0.5; }
+    50% { opacity: 0.7; }
     100% { opacity: 1; }
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes slideUp {
+@keyframes slideIn {
     from { 
-        transform: translateY(20px); 
+        transform: translateY(-10px); 
         opacity: 0; 
     }
     to { 
@@ -36,54 +76,108 @@
     }
 }
 
-/* Animation classes */
-.animate-slide-in {
-    animation: slideIn 0.3s ease-out;
+/* Fade-in Animation Classes */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
-.animate-fade-in {
-    animation: fadeIn 0.5s ease-out;
-}
-
-.animate-slide-up {
-    animation: slideUp 0.4s ease-out;
-}
-
-/* Stat cards */
-.stat-card {
-    transition: all 0.3s ease;
+.fade-in-up.visible {
+    opacity: 1;
     transform: translateY(0);
 }
 
+/* Button Animation - Following linkpro.ma patterns */
+.btn-animation {
+    transition: color 0.5s ease, transform 0.5s ease, background-color 0.3s ease;
+}
+
+.btn-animation:hover {
+    transform: scale(1.1);
+}
+
+/* Custom Button Styles */
+.btn-primary-custom {
+    background: linear-gradient(45deg, #312783, #4338ca);
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 20px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(49, 39, 131, 0.3);
+}
+
+.btn-primary-custom:hover {
+    background: linear-gradient(45deg, #4338ca, #312783);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(49, 39, 131, 0.4);
+}
+
+.btn-secondary-custom {
+    background: white;
+    border: 2px solid #312783;
+    color: #312783;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary-custom:hover {
+    background: #312783;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Stat Cards - Enhanced hover effects */
+.stat-card {
+    transition: all 0.3s ease;
+    transform: translateY(0);
+    border-radius: 20px;
+}
+
 .stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(49, 39, 131, 0.15);
 }
 
 .stat-card .text-3xl {
     transition: color 0.3s ease;
 }
 
-.stat-card:hover .text-3xl {
-    color: #3b82f6;
+/* Link Hover Effects */
+.link-hover {
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
-/* Loading spinner */
+.link-hover:hover {
+    color: #312783 !important;
+    transform: scale(1.05);
+    font-weight: 600;
+}
+
+/* Loading Spinner */
 .spinner {
     border: 3px solid #f3f3f3;
-    border-top: 3px solid #3b82f6;
+    border-top: 3px solid #312783;
     border-radius: 50%;
     width: 40px;
     height: 40px;
     animation: spin 1s linear infinite;
 }
 
-/* Pulse effect for live indicator */
-.pulse {
-    animation: pulse 2s infinite;
+/* Pulse Effect for Live Indicator */
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    background: linear-gradient(45deg, #10b981, #059669);
+    border-radius: 50%;
+    animation: pulse-custom 2s infinite;
 }
 
-/* Chart containers - FIXED SIZING */
+/* Chart Containers - Fixed Sizing */
 .chart-container {
     position: relative;
     width: 100%;
@@ -98,45 +192,100 @@
     max-height: 300px;
 }
 
-/* Table enhancements */
-.table-row-hover {
+/* Custom Card Styling */
+.custom-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(49, 39, 131, 0.1);
+}
+
+/* Navigation Styling */
+.nav-custom {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid #312783;
+}
+
+/* Select Dropdown Styling */
+.select-custom {
+    border: 2px solid #312783;
+    border-radius: 15px;
+    padding: 8px 16px;
+    background: white;
+    color: #312783;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.select-custom:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(49, 39, 131, 0.2);
+}
+
+.select-custom:hover {
+    border-color: #E23216;
+    transform: scale(1.02);
+}
+
+/* Table Styling */
+.table-custom {
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.table-custom thead {
+    background: linear-gradient(45deg, #312783, #4338ca);
+    color: white;
+}
+
+.table-custom tbody tr {
     transition: background-color 0.2s ease;
 }
 
-.table-row-hover:hover {
-    background-color: #f9fafb;
+.table-custom tbody tr:hover {
+    background: rgba(49, 39, 131, 0.05);
 }
 
-/* Button animations */
-button {
-    transition: all 0.2s ease;
+/* Performance Badges */
+.badge-top {
+    background: linear-gradient(45deg, #10b981, #059669);
+    color: white;
+    border-radius: 15px;
+    font-weight: 600;
+    padding: 4px 12px;
+    display: inline-flex;
+    align-items: center;
 }
 
-button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+.badge-active {
+    background: rgba(49, 39, 131, 0.1);
+    color: #312783;
+    border-radius: 15px;
+    font-weight: 600;
+    padding: 4px 12px;
+    display: inline-flex;
+    align-items: center;
 }
 
-button:active {
-    transform: translateY(0);
+/* Recommendation Section */
+.recommendation-gradient {
+    background: linear-gradient(135deg, #312783 0%, #E23216 100%);
+    border-radius: 20px;
+    color: white;
+    box-shadow: 0 8px 25px rgba(49, 39, 131, 0.3);
 }
 
-/* Select dropdown styling */
-select {
-    transition: all 0.2s ease;
-}
-
-select:hover {
-    border-color: #3b82f6;
-}
-
-/* Error toast styling */
+/* Error Toast Styling */
 .error-toast {
+    background: linear-gradient(45deg, #ef4444, #dc2626);
+    border-radius: 20px;
+    color: white;
     animation: slideIn 0.3s ease-out;
     backdrop-filter: blur(10px);
 }
 
-/* Success states */
+/* Success, Warning, Error States */
 .success-indicator {
     color: #10b981;
 }
@@ -149,7 +298,46 @@ select:hover {
     color: #ef4444;
 }
 
-/* Responsive improvements */
+/* Enhanced Button Interactions */
+button {
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Focus States for Accessibility */
+button:focus,
+select:focus {
+    outline: 2px solid #312783;
+    outline-offset: 2px;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #312783, #E23216);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #E23216, #312783);
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
     .stat-card {
         margin-bottom: 1rem;
@@ -162,6 +350,12 @@ select:hover {
     .text-3xl {
         font-size: 1.875rem;
     }
+    
+    .btn-primary-custom,
+    .btn-secondary-custom {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
 }
 
 @media (max-width: 640px) {
@@ -172,29 +366,13 @@ select:hover {
     .grid {
         grid-template-columns: 1fr;
     }
+    
+    .custom-card {
+        margin: 0 8px;
+    }
 }
 
-/* Navigation enhancements */
-nav {
-    backdrop-filter: blur(10px);
-    background-color: rgba(255, 255, 255, 0.95);
-}
-
-/* Card shadows and depth */
-.bg-white {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
-}
-
-.shadow {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Gradient backgrounds */
-.gradient-bg {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-/* Loading states */
+/* Loading States */
 .loading-skeleton {
     background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
     background-size: 200% 100%;
@@ -206,49 +384,26 @@ nav {
     100% { background-position: -200% 0; }
 }
 
-/* Performance indicators */
+/* Performance Indicators */
 .performance-excellent {
-    background-color: #dcfce7;
+    background: linear-gradient(45deg, #dcfce7, #bbf7d0);
     color: #166534;
+    border-radius: 15px;
 }
 
 .performance-good {
-    background-color: #fef3c7;
+    background: linear-gradient(45deg, #fef3c7, #fde68a);
     color: #92400e;
+    border-radius: 15px;
 }
 
 .performance-needs-improvement {
-    background-color: #fee2e2;
+    background: linear-gradient(45deg, #fee2e2, #fecaca);
     color: #991b1b;
+    border-radius: 15px;
 }
 
-/* Scrollbar styling */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #c1c1c1;
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
-}
-
-/* Focus states for accessibility */
-button:focus,
-select:focus {
-    outline: 2px solid #3b82f6;
-    outline-offset: 2px;
-}
-
-/* Print styles */
+/* Print Styles */
 @media print {
     .no-print {
         display: none !important;
@@ -258,8 +413,32 @@ select:focus {
         background: white !important;
     }
     
-    .bg-gradient-to-r {
-        background: #4f46e5 !important;
+    .bg-gradient-custom,
+    .recommendation-gradient {
+        background: #312783 !important;
         color: white !important;
     }
+}
+
+/* Additional Interactive Elements */
+.interactive-icon {
+    transition: all 0.3s ease;
+}
+
+.interactive-icon:hover {
+    transform: rotate(10deg) scale(1.1);
+    color: #E23216;
+}
+
+/* Card Depth and Shadows */
+.elevated-card {
+    box-shadow: 
+        0 4px 8px rgba(49, 39, 131, 0.1),
+        0 8px 16px rgba(49, 39, 131, 0.05);
+}
+
+.elevated-card:hover {
+    box-shadow: 
+        0 8px 16px rgba(49, 39, 131, 0.15),
+        0 16px 32px rgba(49, 39, 131, 0.1);
 }

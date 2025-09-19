@@ -1,5 +1,17 @@
+import sys
+import os
+from pathlib import Path
+
+# Add the src directory to Python path
+current_dir = Path(__file__).parent  # tests directory
+backend_dir = current_dir.parent     # backend directory  
+src_dir = backend_dir / "src"        # src directory
+
+sys.path.insert(0, str(src_dir))
+
+# Now we can import from src
 import psycopg2 # type: ignore
-from src.config import settings
+from config import settings
 import sys
 
 print(f" Testing database connection...")

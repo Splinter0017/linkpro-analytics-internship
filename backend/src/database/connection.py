@@ -1,9 +1,10 @@
-from sqlalchemy import create_engine # type: ignore
-from sqlalchemy.ext.declarative import declarative_base # type: ignore
-from sqlalchemy.orm import sessionmaker # type: ignore
-from sqlalchemy.pool import QueuePool # type: ignore
+# backend/src/database/connection.py
+from sqlalchemy import create_engine, text  # Add 'text' import
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.pool import QueuePool
 import os
-from dotenv import load_dotenv # type: ignore
+from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -40,11 +41,12 @@ def get_db():
     finally:
         db.close()
 
-# Test connection function
+# Test connection function (FIXED)
 def test_connection():
     try:
         with engine.connect() as connection:
-            result = connection.execute("SELECT version();")
+            # Use text() wrapper for raw SQL queries
+            result = connection.execute(text("SELECT version();"))
             version = result.fetchone()[0]
             return True, f"Connected to: {version}"
     except Exception as e:
