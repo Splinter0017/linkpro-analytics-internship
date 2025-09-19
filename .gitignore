@@ -73,3 +73,19 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Data simulation files (excluded from version control)
+tests/data_simulator.py
+generated_data/
+*.csv
+*.parquet
+dataset_summary.json
+
+# Temporary data files
+temp_data/
+synthetic_data/
+
+# Jupyter notebook outputs
+*.ipynb_checkpoints/
+analysis_notebooks/*.csv
+analysis_notebooks/*.parquet
