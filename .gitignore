@@ -66,12 +66,12 @@ yarn-error.log*
 
 # Temporary and generated files
 tests/
+test_analytics.py
+test_db.py
+test_database_connection.py
 start_server.bat
 generate_data.bat
 open_docs.bat
-test_database_connection.py
-test_analytics.py
-test_db.py
 generated_data/
 *.csv
 *.parquet
