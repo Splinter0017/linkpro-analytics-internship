@@ -79,8 +79,4 @@ dataset_summary.json
 temp_data/
 synthetic_data/
 
-# Jupyter notebooks
-notebooks/
-.ipynb_checkpoints/
-
 
