@@ -35,4 +35,4 @@ httpx>=0.25.0
 # Advanced ML libraries 
 xgboost>=1.7.0     # For gradient boosting
 lightgbm>=4.0.0    # Alternative gradient boosting
-tensorflow>=2.13.0 # For deep learning (large dependency)
+tensorflow>=2.13.0 # For deep learning 
