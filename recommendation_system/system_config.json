@@ -1,0 +1,35 @@
+{
+  "model_files": {
+    "regression_model": "best_regression_model.pkl",
+    "classification_model": "best_classification_model.pkl",
+    "feature_scaler": "feature_scaler.pkl",
+    "traffic_encoder": "traffic_encoder.pkl"
+  },
+  "feature_names": [
+    "hour",
+    "hour_sin",
+    "hour_cos",
+    "day_of_week",
+    "day_sin",
+    "day_cos",
+    "is_weekend_num",
+    "month",
+    "traffic_source_encoded",
+    "timeslot_Apr\u00e8s-midi",
+    "timeslot_Matin",
+    "timeslot_Nuit",
+    "timeslot_Soir\u00e9e"
+  ],
+  "recommendation_config": {
+    "confidence_threshold": 0.7,
+    "top_n_recommendations": 5,
+    "prediction_horizon_days": 7,
+    "min_engagement_score": 0.1,
+    "update_frequency_hours": 6
+  },
+  "performance_benchmarks": {
+    "min_r2_score": 0.1,
+    "min_auc_score": 0.6,
+    "max_response_time_seconds": 2.0
+  }
+}
